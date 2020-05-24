@@ -45,7 +45,13 @@ class MyWidget extends StatelessWidget {
           ]),
           SizedBox(height: 16),
           Row(
-            children: [],
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Icon(Icons.accessibility, size: 50),
+              Icon(Icons.timer, size: 50),
+              Icon(Icons.phone_android, size: 50),
+              Icon(Icons.phone_iphone, size: 50),
+            ],
           ),
         ]);
   }
