@@ -9,11 +9,19 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Basic Flutter layout concepts',
-      home: Scaffold(
+        title: 'Basic Flutter layout concepts',
+        home: Scaffold(
           appBar: AppBar(title: Text('Basic Flutter layout concepts')),
-          body: MyWidget()),
-    );
+          body: Container(
+            child: MyWidget(),
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: Colors.black,
+                width: 1.0,
+              ),
+            ),
+          ),
+        ));
   }
 }
 
