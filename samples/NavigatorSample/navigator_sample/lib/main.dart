@@ -43,7 +43,8 @@ class FirstRoute extends StatelessWidget {
             child: RaisedButton(
           child: Text('Open route'),
           onPressed: () {
-            Navigator.pushNamed(context, '/second');
+            Navigator.pushNamed(context, '/second',
+                arguments: ScreenArguments('title', 'message'));
           },
         )));
   }
@@ -52,14 +53,25 @@ class FirstRoute extends StatelessWidget {
 class SecondRoute extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final ScreenArguments args = ModalRoute.of(context).settings.arguments;
     return Scaffold(
         appBar: AppBar(title: Text('Second Route')),
         body: Center(
-            child: RaisedButton(
-          child: Text('Go back!'),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        )));
+            child: Column(mainAxisSize: MainAxisSize.min, children: [
+          Text(args.message),
+          RaisedButton(
+            child: Text('Go back!'),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          )
+        ])));
   }
+}
+
+class ScreenArguments {
+  final String title;
+  final String message;
+
+  ScreenArguments(this.title, this.message);
 }
