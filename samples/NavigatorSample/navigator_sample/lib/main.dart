@@ -35,18 +35,29 @@ class MyApp extends StatelessWidget {
 }
 
 class FirstRoute extends StatelessWidget {
+  var _scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        key: _scaffoldKey,
         appBar: AppBar(title: Text('First Route')),
         body: Center(
             child: RaisedButton(
           child: Text('Open route'),
           onPressed: () {
-            Navigator.pushNamed(context, '/second',
-                arguments: ScreenArguments('title', 'message'));
+            _navigateForResult(context);
           },
         )));
+  }
+
+  _navigateForResult(BuildContext context) async {
+    final result = await Navigator.pushNamed(context, '/second',
+        arguments: ScreenArguments('title', 'message'));
+    if (result is bool && result) {
+      _scaffoldKey.currentState
+          .showSnackBar(SnackBar(content: Text('received result')));
+    }
   }
 }
 
@@ -62,7 +73,7 @@ class SecondRoute extends StatelessWidget {
           RaisedButton(
             child: Text('Go back!'),
             onPressed: () {
-              Navigator.pop(context);
+              Navigator.pop(context, true);
             },
           )
         ])));
