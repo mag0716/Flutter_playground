@@ -38,8 +38,12 @@ class Page extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(title: Text("Internalization Sample")),
         body: Center(
-          child: Text(
-              "current locale = " + Localizations.localeOf(context).toString()),
-        ));
+            child: Column(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+              Text("current locale = " +
+                  Localizations.localeOf(context).toString()),
+            ])));
   }
 }
