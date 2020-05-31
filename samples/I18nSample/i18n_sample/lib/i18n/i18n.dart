@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:i18nsample/i18n/i18n_delegate.dart';
 import 'package:i18nsample/i18n/messages_all.dart';
 import 'package:intl/intl.dart';
 
@@ -17,6 +18,8 @@ class I18n {
   static I18n of(BuildContext context) {
     return Localizations.of<I18n>(context, I18n);
   }
+
+  static const LocalizationsDelegate<I18n> delegate = I18nDelegate();
 
   final String localeName;
 }
