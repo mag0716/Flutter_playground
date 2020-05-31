@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
       ],
       supportedLocales: [
         const Locale('en'),
-        const Locale('jp'),
+        const Locale('ja'),
       ],
       home: Page(),
     );
@@ -35,7 +35,8 @@ class Page extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(title: Text("Internalization Sample")),
         body: Center(
-          child: Text("text"),
+          child: Text(
+              "current locale = " + Localizations.localeOf(context).toString()),
         ));
   }
 }
