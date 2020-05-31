@@ -44,6 +44,7 @@ class Page extends StatelessWidget {
                 children: [
               Text("current locale = " + I18n.of(context).localeName),
               Text(I18n.of(context).title),
+              Text(I18n.of(context).message),
             ])));
   }
 }

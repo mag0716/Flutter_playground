@@ -32,4 +32,6 @@ class I18n {
         'Default Title',
         name: 'title',
       );
+
+  String get message => Intl.message('Default Message', name: 'message');
 }

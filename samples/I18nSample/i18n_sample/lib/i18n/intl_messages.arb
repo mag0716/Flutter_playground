@@ -1,8 +1,14 @@
 {
   "@@locale": "messages",
   "@@last_modified": "2020-05-31T21:16:31.315101",
-  "title": "Hello World",
+  "title": "Default Title",
   "@title": {
+    "description": "Title for the Demo application",
+    "type": "text",
+    "placeholders": {}
+  },
+  "message": "Default Message",
+  "@message": {
     "description": "Title for the Demo application",
     "type": "text",
     "placeholders": {}
