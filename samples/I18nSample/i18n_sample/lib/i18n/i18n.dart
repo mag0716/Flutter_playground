@@ -1,14 +1,18 @@
-import 'package:flutter/material.dart';
-import 'package:i18nsample/i18n/i18n_delegate.dart';
-import 'package:i18nsample/i18n/messages_all.dart';
+import 'dart:ui';
+
+import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
+
+import 'i18n_delegate.dart';
+import 'messages_all.dart';
 
 class I18n {
   I18n(this.localeName);
 
   static Future<I18n> load(Locale locale) {
-    final String name =
-        locale.countryCode.isEmpty ? locale.languageCode : locale.toString();
+    final String name = locale.countryCode == null || locale.countryCode.isEmpty
+        ? locale.languageCode
+        : locale.toString();
     final String localeName = Intl.canonicalizedLocale(name);
     return initializeMessages(localeName).then((_) {
       return I18n(localeName);
