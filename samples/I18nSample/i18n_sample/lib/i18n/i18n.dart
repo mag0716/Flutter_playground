@@ -9,14 +9,14 @@ import 'messages_all.dart';
 class I18n {
   I18n(this.localeName);
 
-  static Future<I18n> load(Locale locale) {
+  static Future<I18n> load(Locale locale) async {
     final String name = locale.countryCode == null || locale.countryCode.isEmpty
         ? locale.languageCode
         : locale.toString();
     final String localeName = Intl.canonicalizedLocale(name);
-    return initializeMessages(localeName).then((_) {
-      return I18n(localeName);
-    });
+    await initializeMessages(localeName);
+    Intl.defaultLocale = localeName;
+    return I18n(localeName);
   }
 
   static I18n of(BuildContext context) {
