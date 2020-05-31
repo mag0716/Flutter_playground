@@ -29,7 +29,7 @@ class I18n {
 
   // 以下に定義されたものだけ、intl_translation:generate_from_arb の生成時に利用される
   String get title => Intl.message(
-        'Hello World',
+        'Default Title',
         name: 'title',
       );
 }
