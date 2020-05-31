@@ -26,11 +26,7 @@ class MyApp extends StatelessWidget {
           // closer together (more dense) than on mobile platforms.
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        initialRoute: '/',
-        routes: {
-          '/': (context) => FirstRoute(),
-          '/second': (context) => SecondRoute()
-        });
+        home: FirstRoute());
   }
 }
 
@@ -52,8 +48,11 @@ class FirstRoute extends StatelessWidget {
   }
 
   _navigateForResult(BuildContext context) async {
-    final result = await Navigator.pushNamed(context, '/second',
-        arguments: ScreenArguments('title', 'message'));
+    final result = await Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) =>
+                SecondRoute(ScreenArguments("title", "message"))));
     if (result is bool && result) {
       _scaffoldKey.currentState
           .showSnackBar(SnackBar(content: Text('received result')));
@@ -62,14 +61,17 @@ class FirstRoute extends StatelessWidget {
 }
 
 class SecondRoute extends StatelessWidget {
+  final ScreenArguments _args;
+
+  SecondRoute(this._args);
+
   @override
   Widget build(BuildContext context) {
-    final ScreenArguments args = ModalRoute.of(context).settings.arguments;
     return Scaffold(
         appBar: AppBar(title: Text('Second Route')),
         body: Center(
             child: Column(mainAxisSize: MainAxisSize.min, children: [
-          Text(args.message),
+          Text(_args.message),
           RaisedButton(
             child: Text('Go back!'),
             onPressed: () {
