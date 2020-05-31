@@ -42,8 +42,7 @@ class Page extends StatelessWidget {
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-              Text("current locale = " +
-                  Localizations.localeOf(context).toString()),
+              Text("current locale = " + I18n.of(context).localeName),
             ])));
   }
 }
