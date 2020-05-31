@@ -1,0 +1,9 @@
+{
+  "@@locale": "ja",
+  "title": "こんにちは",
+  "@title": {
+    "description": "Title for the Demo application",
+    "type": "text",
+    "placeholders": {}
+  }
+}
