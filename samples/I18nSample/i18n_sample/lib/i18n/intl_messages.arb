@@ -1,0 +1,10 @@
+{
+  "@@locale": "messages",
+  "@@last_modified": "2020-05-31T21:16:31.315101",
+  "title": "Hello World",
+  "@title": {
+    "description": "Title for the Demo application",
+    "type": "text",
+    "placeholders": {}
+  }
+}
