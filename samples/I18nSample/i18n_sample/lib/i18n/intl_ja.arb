@@ -1,0 +1,15 @@
+{
+  "@@locale": "ja",
+  "title": "こんにちは",
+  "@title": {
+    "description": "Title for the Demo application",
+    "type": "text",
+    "placeholders": {}
+  },
+  "message": "メッセージ",
+  "@message": {
+    "description": "Title for the Demo application",
+    "type": "text",
+    "placeholders": {}
+  }
+}

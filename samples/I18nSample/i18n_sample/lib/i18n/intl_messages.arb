@@ -1,0 +1,14 @@
+{
+  "@@locale": "messages",
+  "@@last_modified": "2020-06-01T20:59:46.067339",
+  "title": "Default Title",
+  "@title": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "message": "Default Message",
+  "@message": {
+    "type": "text",
+    "placeholders": {}
+  }
+}

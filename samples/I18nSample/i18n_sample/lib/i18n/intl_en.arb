@@ -1,0 +1,15 @@
+{
+  "@@locale": "en",
+  "title": "Hello",
+  "@title": {
+    "description": "Title for the Demo application",
+    "type": "text",
+    "placeholders": {}
+  },
+  "message": "Message",
+  "@message": {
+      "description": "Title for the Demo application",
+      "type": "text",
+      "placeholders": {}
+    }
+}
