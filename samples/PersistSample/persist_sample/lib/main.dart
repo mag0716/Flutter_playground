@@ -33,11 +33,16 @@ class _ToDoListPageState extends State<ToDoListPage> {
   static String keyLastAddDatetime = "LastAddDatetime";
   String _lastAddDatetimeText;
   SharedPreferences _preferences;
+  final _toDoList = <ToDo>[];
 
   @override
   void initState() {
     super.initState();
     _init();
+    // TODO: DB から取得
+    for (int i = 0; i < 20; i++) {
+      _toDoList.add(ToDo(i, 'ToDo$i'));
+    }
   }
 
   void _init() async {
@@ -77,6 +82,7 @@ class _ToDoListPageState extends State<ToDoListPage> {
               'Last Add Datetime:$_lastAddDatetimeText',
               style: Theme.of(context).textTheme.subtitle2,
             ),
+            Expanded(child: _buildToDoList()),
           ],
         ),
       ),
@@ -86,5 +92,31 @@ class _ToDoListPageState extends State<ToDoListPage> {
         child: Icon(Icons.add),
       ),
     );
+  }
+
+  Widget _buildToDoList() {
+    return ListView.builder(
+        itemCount: _toDoList.length,
+        itemBuilder: (context, i) {
+          var toDo = _toDoList[i];
+          return _buildRow(toDo);
+        });
+  }
+
+  Widget _buildRow(ToDo toDo) {
+    return Container(
+        decoration: BoxDecoration(
+            border: Border(bottom: BorderSide(color: Colors.grey))),
+        child: ListTile(title: Text(toDo.title)));
+  }
+}
+
+class ToDo {
+  int id;
+  String title;
+
+  ToDo(int id, String title) {
+    this.id = id;
+    this.title = title;
   }
 }
