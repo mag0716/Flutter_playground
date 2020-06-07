@@ -10,15 +10,13 @@ class AddToDoPage extends StatelessWidget {
         body: new Center(
             child: new Column(
           children: <Widget>[
-            TextField(
-
-            ),
+            TextField(),
             RaisedButton(onPressed: _addToDo, child: const Text('ADD'))
           ],
         )));
   }
 
-  void _addToDo() {
+  void _addToDo() async {
     // TODO: DB に保存
   }
 }

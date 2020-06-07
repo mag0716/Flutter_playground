@@ -46,8 +46,8 @@ class _ToDoListPageState extends State<ToDoListPage> {
   }
 
   void _init() async {
-    var lastAddDatetime =
-        await TodoRepository.getInstance().loadLastAddDatetime();
+    var repository = await TodoRepository.getInstance();
+    var lastAddDatetime = repository.loadLastAddDatetime();
     setState(() {
       if (lastAddDatetime != 0) {
         _lastAddDatetimeText =
