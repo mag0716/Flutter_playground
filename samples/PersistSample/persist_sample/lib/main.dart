@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:persistsample/add_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
@@ -59,6 +60,8 @@ class _ToDoListPageState extends State<ToDoListPage> {
     });
   }
 
+  void _moveToAddPage(BuildContext context) {}
+
   void _updateLastAddDatetime() async {
     var now = DateTime.now().microsecondsSinceEpoch;
     await _preferences.setInt(keyLastAddDatetime, now);
@@ -87,8 +90,11 @@ class _ToDoListPageState extends State<ToDoListPage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _updateLastAddDatetime,
-        tooltip: 'Increment',
+        onPressed: () =>
+            Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+          return new AddToDoPage();
+        })),
+        tooltip: 'Add',
         child: Icon(Icons.add),
       ),
     );
