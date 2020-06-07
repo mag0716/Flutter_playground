@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:persistsample/add_page.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:persistsample/todo.dart';
+import 'package:persistsample/todo_repository.dart';
 
 void main() {
   runApp(MyApp());
@@ -31,9 +32,7 @@ class ToDoListPage extends StatefulWidget {
 }
 
 class _ToDoListPageState extends State<ToDoListPage> {
-  static String keyLastAddDatetime = "LastAddDatetime";
   String _lastAddDatetimeText;
-  SharedPreferences _preferences;
   final _toDoList = <ToDo>[];
 
   @override
@@ -47,8 +46,8 @@ class _ToDoListPageState extends State<ToDoListPage> {
   }
 
   void _init() async {
-    _preferences = await SharedPreferences.getInstance();
-    var lastAddDatetime = _preferences.getInt(keyLastAddDatetime) ?? 0;
+    var lastAddDatetime =
+        await TodoRepository.getInstance().loadLastAddDatetime();
     setState(() {
       if (lastAddDatetime != 0) {
         _lastAddDatetimeText =
@@ -57,17 +56,6 @@ class _ToDoListPageState extends State<ToDoListPage> {
       } else {
         _lastAddDatetimeText = "no data.";
       }
-    });
-  }
-
-  void _moveToAddPage(BuildContext context) {}
-
-  void _updateLastAddDatetime() async {
-    var now = DateTime.now().microsecondsSinceEpoch;
-    await _preferences.setInt(keyLastAddDatetime, now);
-    setState(() {
-      _lastAddDatetimeText =
-          DateTime.fromMicrosecondsSinceEpoch(now).toIso8601String();
     });
   }
 
@@ -114,15 +102,5 @@ class _ToDoListPageState extends State<ToDoListPage> {
         decoration: BoxDecoration(
             border: Border(bottom: BorderSide(color: Colors.grey))),
         child: ListTile(title: Text(toDo.title)));
-  }
-}
-
-class ToDo {
-  int id;
-  String title;
-
-  ToDo(int id, String title) {
-    this.id = id;
-    this.title = title;
   }
 }
