@@ -39,16 +39,15 @@ class _ToDoListPageState extends State<ToDoListPage> {
   void initState() {
     super.initState();
     _init();
-    // TODO: DB から取得
-    for (int i = 0; i < 20; i++) {
-      _toDoList.add(ToDo(i, 'ToDo$i'));
-    }
   }
 
   void _init() async {
     var repository = await TodoRepository.getInstance();
+    var toDoList = await repository.loadToDo();
     var lastAddDatetime = repository.loadLastAddDatetime();
     setState(() {
+      _toDoList.addAll(toDoList);
+
       if (lastAddDatetime != 0) {
         _lastAddDatetimeText =
             DateTime.fromMicrosecondsSinceEpoch(lastAddDatetime)
