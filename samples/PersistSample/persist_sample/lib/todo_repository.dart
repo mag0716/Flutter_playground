@@ -6,9 +6,9 @@ import 'package:sqflite/sqflite.dart';
 class TodoRepository {
   static TodoRepository _instance;
 
-  static String dbName = "ToDo";
-  static String tableName = "todo";
-  static String keyLastAddDatetime = "LastAddDatetime";
+  static String _dbName = "ToDo";
+  static String _tableName = "todo";
+  static String _keyLastAddDatetime = "LastAddDatetime";
 
   static SharedPreferences _preferences;
   static Database _db;
@@ -17,10 +17,10 @@ class TodoRepository {
     if (_instance == null) {
       _instance = TodoRepository._privateConstructor();
       _preferences = await SharedPreferences.getInstance();
-      _db = await openDatabase(join(await getDatabasesPath(), dbName),
+      _db = await openDatabase(join(await getDatabasesPath(), _dbName),
           onCreate: (db, version) {
         return db.execute(
-            "CREATE TABLE $tableName(id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT);");
+            "CREATE TABLE $_tableName(id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT);");
       }, version: 1);
     }
     return _instance;
@@ -30,27 +30,24 @@ class TodoRepository {
 
   Future<void> saveLastAddDatetime() async {
     var now = DateTime.now().microsecondsSinceEpoch;
-    await _preferences.setInt(keyLastAddDatetime, now);
+    await _preferences.setInt(_keyLastAddDatetime, now);
   }
 
   int loadLastAddDatetime() {
-    return _preferences.getInt(keyLastAddDatetime) ?? 0;
+    return _preferences.getInt(_keyLastAddDatetime) ?? 0;
   }
 
   Future<void> saveToDo(ToDo toDo) async {
     await _db.insert(
-      tableName,
+      _tableName,
       toDo.toMap(),
     );
   }
 
   Future<List<ToDo>> loadToDo() async {
-    final List<Map<String, dynamic>> maps = await _db.query(tableName);
+    final List<Map<String, dynamic>> maps = await _db.query(_tableName);
     return List.generate(maps.length, (i) {
-      return ToDo(
-        maps[i]['id'],
-        maps[i]['title'],
-      );
+      return ToDo.fromJson(maps[i]);
     });
   }
 }
