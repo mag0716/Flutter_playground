@@ -19,17 +19,18 @@ class AddToDoPage extends StatelessWidget {
             ),
             RaisedButton(
                 onPressed: () {
-                  _addToDo(_titleController.text);
-                  Navigator.pop(context);
+                  _addToDo(context, _titleController.text);
                 },
                 child: const Text('ADD'))
           ],
         )));
   }
 
-  void _addToDo(String title) async {
+  void _addToDo(BuildContext context, String title) async {
     TodoRepository repository = await TodoRepository.getInstance();
     await repository.saveToDo(ToDo(null, title));
     await repository.saveLastAddDatetime();
+
+    Navigator.pop(context, true);
   }
 }

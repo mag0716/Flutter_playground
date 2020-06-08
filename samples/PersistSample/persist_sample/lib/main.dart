@@ -38,24 +38,8 @@ class _ToDoListPageState extends State<ToDoListPage> {
   @override
   void initState() {
     super.initState();
-    _init();
-  }
-
-  void _init() async {
-    var repository = await TodoRepository.getInstance();
-    var toDoList = await repository.loadToDo();
-    var lastAddDatetime = repository.loadLastAddDatetime();
-    setState(() {
-      _toDoList.addAll(toDoList);
-
-      if (lastAddDatetime != 0) {
-        _lastAddDatetimeText =
-            DateTime.fromMicrosecondsSinceEpoch(lastAddDatetime)
-                .toIso8601String();
-      } else {
-        _lastAddDatetimeText = "no data.";
-      }
-    });
+    _updateToDoList();
+    _updateLastAddDateTime();
   }
 
   @override
@@ -77,10 +61,9 @@ class _ToDoListPageState extends State<ToDoListPage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () =>
-            Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-          return new AddToDoPage();
-        })),
+        onPressed: () {
+          _navigateForResult(context);
+        },
         tooltip: 'Add',
         child: Icon(Icons.add),
       ),
@@ -101,5 +84,39 @@ class _ToDoListPageState extends State<ToDoListPage> {
         decoration: BoxDecoration(
             border: Border(bottom: BorderSide(color: Colors.grey))),
         child: ListTile(title: Text(toDo.title)));
+  }
+
+  _navigateForResult(BuildContext context) async {
+    final result =
+        await Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+      return new AddToDoPage();
+    }));
+    if (result is bool && result) {
+      _updateToDoList();
+      _updateLastAddDateTime();
+    }
+  }
+
+  _updateToDoList() async {
+    var repository = await TodoRepository.getInstance();
+    var toDoList = await repository.loadToDo();
+    setState(() {
+      _toDoList.clear();
+      _toDoList.addAll(toDoList);
+    });
+  }
+
+  _updateLastAddDateTime() async {
+    var repository = await TodoRepository.getInstance();
+    var lastAddDatetime = repository.loadLastAddDatetime();
+    setState(() {
+      if (lastAddDatetime != 0) {
+        _lastAddDatetimeText =
+            DateTime.fromMicrosecondsSinceEpoch(lastAddDatetime)
+                .toIso8601String();
+      } else {
+        _lastAddDatetimeText = "no data.";
+      }
+    });
   }
 }
