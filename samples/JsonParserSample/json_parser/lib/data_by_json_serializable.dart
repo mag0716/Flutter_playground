@@ -12,7 +12,7 @@ class DataByJsonSerializable {
   DataByJsonSerializable({this.id, this.title});
 
   factory DataByJsonSerializable.fromJson(Map<String, dynamic> json) =>
-      _$DataByJsonSerializable(json);
+      _$DataByJsonSerializableFromJson(json);
 
   Map<String, dynamic> toJson() => _$DataByJsonSerializableToJson(this);
 }
