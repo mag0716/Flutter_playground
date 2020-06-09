@@ -1,4 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+
+final keyId = 'id';
+final keyTitle = 'title';
 
 void main() {
   runApp(MyApp());
@@ -21,7 +26,7 @@ class MyApp extends StatelessWidget {
 
 class Page extends StatelessWidget {
   Page({Key key, this.title}) : super(key: key);
-  final Map<String, dynamic> _json = {"id": 1, "title": "title1"};
+  final String _json = "{\"id\":1,\"title\":\"title1\"}";
   final String title;
 
   @override
@@ -35,8 +40,8 @@ class Page extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              'Manual Parse : ${Data.fromJson(_json).toString()}',
-              style: Theme.of(context).textTheme.headline4,
+              'Manual Parse : ${Data.fromJson(jsonDecode(_json)).toString()}',
+              style: Theme.of(context).textTheme.bodyText1,
             ),
           ],
         ),
@@ -46,9 +51,6 @@ class Page extends StatelessWidget {
 }
 
 class Data {
-  static final keyId = 'id';
-  static final keyTitle = 'title';
-
   final int id;
   final String title;
 
