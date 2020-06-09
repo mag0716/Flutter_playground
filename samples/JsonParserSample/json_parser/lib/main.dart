@@ -19,48 +19,49 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class Page extends StatefulWidget {
+class Page extends StatelessWidget {
   Page({Key key, this.title}) : super(key: key);
+  final Map<String, dynamic> _json = {"id": 1, "title": "title1"};
   final String title;
-
-  @override
-  _PageState createState() => _PageState();
-}
-
-class _PageState extends State<Page> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text(title),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
+              'Manual Parse : ${Data.fromJson(_json).toString()}',
               style: Theme.of(context).textTheme.headline4,
             ),
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ),
     );
+  }
+}
+
+class Data {
+  static final keyId = 'id';
+  static final keyTitle = 'title';
+
+  final int id;
+  final String title;
+
+  Data({this.id, this.title});
+
+  Data.fromJson(Map<String, dynamic> json)
+      : id = json[keyId],
+        title = json[keyTitle];
+
+  Map<String, dynamic> toJson() => {keyId: id, keyTitle: title};
+
+  @override
+  String toString() {
+    return toJson().toString();
   }
 }
