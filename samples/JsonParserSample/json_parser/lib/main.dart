@@ -2,8 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 
-final keyId = 'id';
-final keyTitle = 'title';
+import 'data.dart';
 
 void main() {
   runApp(MyApp());
@@ -47,23 +46,5 @@ class Page extends StatelessWidget {
         ),
       ),
     );
-  }
-}
-
-class Data {
-  final int id;
-  final String title;
-
-  Data({this.id, this.title});
-
-  Data.fromJson(Map<String, dynamic> json)
-      : id = json[keyId],
-        title = json[keyTitle];
-
-  Map<String, dynamic> toJson() => {keyId: id, keyTitle: title};
-
-  @override
-  String toString() {
-    return toJson().toString();
   }
 }
