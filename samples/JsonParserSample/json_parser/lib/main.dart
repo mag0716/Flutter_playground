@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:jsonparser/data_by_json_serializable.dart';
 
 import 'data.dart';
 
@@ -42,6 +43,10 @@ class Page extends StatelessWidget {
               'Manual Parse : ${Data.fromJson(jsonDecode(_json)).toString()}',
               style: Theme.of(context).textTheme.bodyText1,
             ),
+            Text(
+              'json_serializable : ${DataByJsonSerializable.fromJson(jsonDecode(_json)).toString()}',
+              style: Theme.of(context).textTheme.bodyText1,
+            )
           ],
         ),
       ),

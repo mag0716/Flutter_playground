@@ -15,4 +15,9 @@ class DataByJsonSerializable {
       _$DataByJsonSerializableFromJson(json);
 
   Map<String, dynamic> toJson() => _$DataByJsonSerializableToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
 }
