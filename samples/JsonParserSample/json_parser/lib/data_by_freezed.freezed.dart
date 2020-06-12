@@ -8,11 +8,15 @@ part of 'data_by_freezed.dart';
 // **************************************************************************
 
 T _$identity<T>(T value) => value;
+DataByFreezed _$DataByFreezedFromJson(Map<String, dynamic> json) {
+  return _DataByFreezed.fromJson(json);
+}
 
 class _$DataByFreezedTearOff {
   const _$DataByFreezedTearOff();
 
-  _DataByFreezed call({int id, String title}) {
+  _DataByFreezed call(
+      {@JsonKey(name: 'id') int id, @JsonKey(name: 'title') String title}) {
     return _DataByFreezed(
       id: id,
       title: title,
@@ -24,9 +28,12 @@ class _$DataByFreezedTearOff {
 const $DataByFreezed = _$DataByFreezedTearOff();
 
 mixin _$DataByFreezed {
+  @JsonKey(name: 'id')
   int get id;
+  @JsonKey(name: 'title')
   String get title;
 
+  Map<String, dynamic> toJson();
   $DataByFreezedCopyWith<DataByFreezed> get copyWith;
 }
 
@@ -34,7 +41,8 @@ abstract class $DataByFreezedCopyWith<$Res> {
   factory $DataByFreezedCopyWith(
           DataByFreezed value, $Res Function(DataByFreezed) then) =
       _$DataByFreezedCopyWithImpl<$Res>;
-  $Res call({int id, String title});
+  $Res call(
+      {@JsonKey(name: 'id') int id, @JsonKey(name: 'title') String title});
 }
 
 class _$DataByFreezedCopyWithImpl<$Res>
@@ -63,7 +71,8 @@ abstract class _$DataByFreezedCopyWith<$Res>
           _DataByFreezed value, $Res Function(_DataByFreezed) then) =
       __$DataByFreezedCopyWithImpl<$Res>;
   @override
-  $Res call({int id, String title});
+  $Res call(
+      {@JsonKey(name: 'id') int id, @JsonKey(name: 'title') String title});
 }
 
 class __$DataByFreezedCopyWithImpl<$Res>
@@ -88,12 +97,19 @@ class __$DataByFreezedCopyWithImpl<$Res>
   }
 }
 
+@JsonSerializable()
 class _$_DataByFreezed implements _DataByFreezed {
-  const _$_DataByFreezed({this.id, this.title});
+  const _$_DataByFreezed(
+      {@JsonKey(name: 'id') this.id, @JsonKey(name: 'title') this.title});
+
+  factory _$_DataByFreezed.fromJson(Map<String, dynamic> json) =>
+      _$_$_DataByFreezedFromJson(json);
 
   @override
+  @JsonKey(name: 'id')
   final int id;
   @override
+  @JsonKey(name: 'title')
   final String title;
 
   @override
@@ -120,14 +136,26 @@ class _$_DataByFreezed implements _DataByFreezed {
   @override
   _$DataByFreezedCopyWith<_DataByFreezed> get copyWith =>
       __$DataByFreezedCopyWithImpl<_DataByFreezed>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$_$_DataByFreezedToJson(this);
+  }
 }
 
 abstract class _DataByFreezed implements DataByFreezed {
-  const factory _DataByFreezed({int id, String title}) = _$_DataByFreezed;
+  const factory _DataByFreezed(
+      {@JsonKey(name: 'id') int id,
+      @JsonKey(name: 'title') String title}) = _$_DataByFreezed;
+
+  factory _DataByFreezed.fromJson(Map<String, dynamic> json) =
+      _$_DataByFreezed.fromJson;
 
   @override
+  @JsonKey(name: 'id')
   int get id;
   @override
+  @JsonKey(name: 'title')
   String get title;
   @override
   _$DataByFreezedCopyWith<_DataByFreezed> get copyWith;
