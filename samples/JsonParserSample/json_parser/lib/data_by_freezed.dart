@@ -7,7 +7,9 @@ part 'data_by_freezed.g.dart';
 abstract class DataByFreezed with _$DataByFreezed {
   const factory DataByFreezed(
       {@JsonKey(name: 'id') int id,
-      @JsonKey(name: 'title') String title}) = _DataByFreezed;
+      @JsonKey(name: 'title') String title,
+      @JsonKey(name: 'isEnabled') bool isEnabled,
+      @JsonKey(name: 'values') List<int> values}) = _DataByFreezed;
 
   factory DataByFreezed.fromJson(Map<String, dynamic> json) =>
       _$DataByFreezedFromJson(json);

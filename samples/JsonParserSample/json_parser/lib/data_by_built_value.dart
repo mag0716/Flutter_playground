@@ -1,3 +1,4 @@
+import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 
@@ -13,6 +14,12 @@ abstract class DataByBuiltValue
 
   @BuiltValueField(wireName: 'title')
   String get title;
+
+  @BuiltValueField(wireName: 'isEnabled')
+  bool get isEnabled;
+
+  @BuiltValueField(wireName: 'values')
+  BuiltList<int> get values;
 
   DataByBuiltValue._();
 

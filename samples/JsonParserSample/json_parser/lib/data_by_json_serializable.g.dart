@@ -11,6 +11,8 @@ DataByJsonSerializable _$DataByJsonSerializableFromJson(
   return DataByJsonSerializable(
     id: json['id'] as int,
     title: json['title'] as String,
+    isEnabled: json['isEnabled'] as bool,
+    values: (json['values'] as List)?.map((e) => e as int)?.toList(),
   );
 }
 
@@ -19,4 +21,6 @@ Map<String, dynamic> _$DataByJsonSerializableToJson(
     <String, dynamic>{
       'id': instance.id,
       'title': instance.title,
+      'isEnabled': instance.isEnabled,
+      'values': instance.values,
     };

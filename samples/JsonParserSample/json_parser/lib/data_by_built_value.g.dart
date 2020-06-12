@@ -25,6 +25,13 @@ class _$DataByBuiltValueSerializer
       'title',
       serializers.serialize(object.title,
           specifiedType: const FullType(String)),
+      'isEnabled',
+      serializers.serialize(object.isEnabled,
+          specifiedType: const FullType(bool)),
+      'values',
+      serializers.serialize(object.values,
+          specifiedType:
+              const FullType(BuiltList, const [const FullType(int)])),
     ];
 
     return result;
@@ -50,6 +57,16 @@ class _$DataByBuiltValueSerializer
           result.title = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
           break;
+        case 'isEnabled':
+          result.isEnabled = serializers.deserialize(value,
+              specifiedType: const FullType(bool)) as bool;
+          break;
+        case 'values':
+          result.values.replace(serializers.deserialize(value,
+                  specifiedType:
+                      const FullType(BuiltList, const [const FullType(int)]))
+              as BuiltList<Object>);
+          break;
       }
     }
 
@@ -62,17 +79,28 @@ class _$DataByBuiltValue extends DataByBuiltValue {
   final int id;
   @override
   final String title;
+  @override
+  final bool isEnabled;
+  @override
+  final BuiltList<int> values;
 
   factory _$DataByBuiltValue(
           [void Function(DataByBuiltValueBuilder) updates]) =>
       (new DataByBuiltValueBuilder()..update(updates)).build();
 
-  _$DataByBuiltValue._({this.id, this.title}) : super._() {
+  _$DataByBuiltValue._({this.id, this.title, this.isEnabled, this.values})
+      : super._() {
     if (id == null) {
       throw new BuiltValueNullFieldError('DataByBuiltValue', 'id');
     }
     if (title == null) {
       throw new BuiltValueNullFieldError('DataByBuiltValue', 'title');
+    }
+    if (isEnabled == null) {
+      throw new BuiltValueNullFieldError('DataByBuiltValue', 'isEnabled');
+    }
+    if (values == null) {
+      throw new BuiltValueNullFieldError('DataByBuiltValue', 'values');
     }
   }
 
@@ -87,19 +115,27 @@ class _$DataByBuiltValue extends DataByBuiltValue {
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is DataByBuiltValue && id == other.id && title == other.title;
+    return other is DataByBuiltValue &&
+        id == other.id &&
+        title == other.title &&
+        isEnabled == other.isEnabled &&
+        values == other.values;
   }
 
   @override
   int get hashCode {
-    return $jf($jc($jc(0, id.hashCode), title.hashCode));
+    return $jf($jc(
+        $jc($jc($jc(0, id.hashCode), title.hashCode), isEnabled.hashCode),
+        values.hashCode));
   }
 
   @override
   String toString() {
     return (newBuiltValueToStringHelper('DataByBuiltValue')
           ..add('id', id)
-          ..add('title', title))
+          ..add('title', title)
+          ..add('isEnabled', isEnabled)
+          ..add('values', values))
         .toString();
   }
 }
@@ -116,12 +152,22 @@ class DataByBuiltValueBuilder
   String get title => _$this._title;
   set title(String title) => _$this._title = title;
 
+  bool _isEnabled;
+  bool get isEnabled => _$this._isEnabled;
+  set isEnabled(bool isEnabled) => _$this._isEnabled = isEnabled;
+
+  ListBuilder<int> _values;
+  ListBuilder<int> get values => _$this._values ??= new ListBuilder<int>();
+  set values(ListBuilder<int> values) => _$this._values = values;
+
   DataByBuiltValueBuilder();
 
   DataByBuiltValueBuilder get _$this {
     if (_$v != null) {
       _id = _$v.id;
       _title = _$v.title;
+      _isEnabled = _$v.isEnabled;
+      _values = _$v.values?.toBuilder();
       _$v = null;
     }
     return this;
@@ -142,7 +188,25 @@ class DataByBuiltValueBuilder
 
   @override
   _$DataByBuiltValue build() {
-    final _$result = _$v ?? new _$DataByBuiltValue._(id: id, title: title);
+    _$DataByBuiltValue _$result;
+    try {
+      _$result = _$v ??
+          new _$DataByBuiltValue._(
+              id: id,
+              title: title,
+              isEnabled: isEnabled,
+              values: values.build());
+    } catch (_) {
+      String _$failedField;
+      try {
+        _$failedField = 'values';
+        values.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            'DataByBuiltValue', _$failedField, e.toString());
+      }
+      rethrow;
+    }
     replace(_$result);
     return _$result;
   }

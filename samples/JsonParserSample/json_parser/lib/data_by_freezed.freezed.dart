@@ -16,10 +16,15 @@ class _$DataByFreezedTearOff {
   const _$DataByFreezedTearOff();
 
   _DataByFreezed call(
-      {@JsonKey(name: 'id') int id, @JsonKey(name: 'title') String title}) {
+      {@JsonKey(name: 'id') int id,
+      @JsonKey(name: 'title') String title,
+      @JsonKey(name: 'isEnabled') bool isEnabled,
+      @JsonKey(name: 'values') List<int> values}) {
     return _DataByFreezed(
       id: id,
       title: title,
+      isEnabled: isEnabled,
+      values: values,
     );
   }
 }
@@ -32,6 +37,10 @@ mixin _$DataByFreezed {
   int get id;
   @JsonKey(name: 'title')
   String get title;
+  @JsonKey(name: 'isEnabled')
+  bool get isEnabled;
+  @JsonKey(name: 'values')
+  List<int> get values;
 
   Map<String, dynamic> toJson();
   $DataByFreezedCopyWith<DataByFreezed> get copyWith;
@@ -42,7 +51,10 @@ abstract class $DataByFreezedCopyWith<$Res> {
           DataByFreezed value, $Res Function(DataByFreezed) then) =
       _$DataByFreezedCopyWithImpl<$Res>;
   $Res call(
-      {@JsonKey(name: 'id') int id, @JsonKey(name: 'title') String title});
+      {@JsonKey(name: 'id') int id,
+      @JsonKey(name: 'title') String title,
+      @JsonKey(name: 'isEnabled') bool isEnabled,
+      @JsonKey(name: 'values') List<int> values});
 }
 
 class _$DataByFreezedCopyWithImpl<$Res>
@@ -57,10 +69,14 @@ class _$DataByFreezedCopyWithImpl<$Res>
   $Res call({
     Object id = freezed,
     Object title = freezed,
+    Object isEnabled = freezed,
+    Object values = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed ? _value.id : id as int,
       title: title == freezed ? _value.title : title as String,
+      isEnabled: isEnabled == freezed ? _value.isEnabled : isEnabled as bool,
+      values: values == freezed ? _value.values : values as List<int>,
     ));
   }
 }
@@ -72,7 +88,10 @@ abstract class _$DataByFreezedCopyWith<$Res>
       __$DataByFreezedCopyWithImpl<$Res>;
   @override
   $Res call(
-      {@JsonKey(name: 'id') int id, @JsonKey(name: 'title') String title});
+      {@JsonKey(name: 'id') int id,
+      @JsonKey(name: 'title') String title,
+      @JsonKey(name: 'isEnabled') bool isEnabled,
+      @JsonKey(name: 'values') List<int> values});
 }
 
 class __$DataByFreezedCopyWithImpl<$Res>
@@ -89,10 +108,14 @@ class __$DataByFreezedCopyWithImpl<$Res>
   $Res call({
     Object id = freezed,
     Object title = freezed,
+    Object isEnabled = freezed,
+    Object values = freezed,
   }) {
     return _then(_DataByFreezed(
       id: id == freezed ? _value.id : id as int,
       title: title == freezed ? _value.title : title as String,
+      isEnabled: isEnabled == freezed ? _value.isEnabled : isEnabled as bool,
+      values: values == freezed ? _value.values : values as List<int>,
     ));
   }
 }
@@ -100,7 +123,10 @@ class __$DataByFreezedCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_DataByFreezed implements _DataByFreezed {
   const _$_DataByFreezed(
-      {@JsonKey(name: 'id') this.id, @JsonKey(name: 'title') this.title});
+      {@JsonKey(name: 'id') this.id,
+      @JsonKey(name: 'title') this.title,
+      @JsonKey(name: 'isEnabled') this.isEnabled,
+      @JsonKey(name: 'values') this.values});
 
   factory _$_DataByFreezed.fromJson(Map<String, dynamic> json) =>
       _$_$_DataByFreezedFromJson(json);
@@ -111,10 +137,16 @@ class _$_DataByFreezed implements _DataByFreezed {
   @override
   @JsonKey(name: 'title')
   final String title;
+  @override
+  @JsonKey(name: 'isEnabled')
+  final bool isEnabled;
+  @override
+  @JsonKey(name: 'values')
+  final List<int> values;
 
   @override
   String toString() {
-    return 'DataByFreezed(id: $id, title: $title)';
+    return 'DataByFreezed(id: $id, title: $title, isEnabled: $isEnabled, values: $values)';
   }
 
   @override
@@ -124,14 +156,21 @@ class _$_DataByFreezed implements _DataByFreezed {
             (identical(other.id, id) ||
                 const DeepCollectionEquality().equals(other.id, id)) &&
             (identical(other.title, title) ||
-                const DeepCollectionEquality().equals(other.title, title)));
+                const DeepCollectionEquality().equals(other.title, title)) &&
+            (identical(other.isEnabled, isEnabled) ||
+                const DeepCollectionEquality()
+                    .equals(other.isEnabled, isEnabled)) &&
+            (identical(other.values, values) ||
+                const DeepCollectionEquality().equals(other.values, values)));
   }
 
   @override
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(id) ^
-      const DeepCollectionEquality().hash(title);
+      const DeepCollectionEquality().hash(title) ^
+      const DeepCollectionEquality().hash(isEnabled) ^
+      const DeepCollectionEquality().hash(values);
 
   @override
   _$DataByFreezedCopyWith<_DataByFreezed> get copyWith =>
@@ -146,7 +185,9 @@ class _$_DataByFreezed implements _DataByFreezed {
 abstract class _DataByFreezed implements DataByFreezed {
   const factory _DataByFreezed(
       {@JsonKey(name: 'id') int id,
-      @JsonKey(name: 'title') String title}) = _$_DataByFreezed;
+      @JsonKey(name: 'title') String title,
+      @JsonKey(name: 'isEnabled') bool isEnabled,
+      @JsonKey(name: 'values') List<int> values}) = _$_DataByFreezed;
 
   factory _DataByFreezed.fromJson(Map<String, dynamic> json) =
       _$_DataByFreezed.fromJson;
@@ -157,6 +198,12 @@ abstract class _DataByFreezed implements DataByFreezed {
   @override
   @JsonKey(name: 'title')
   String get title;
+  @override
+  @JsonKey(name: 'isEnabled')
+  bool get isEnabled;
+  @override
+  @JsonKey(name: 'values')
+  List<int> get values;
   @override
   _$DataByFreezedCopyWith<_DataByFreezed> get copyWith;
 }

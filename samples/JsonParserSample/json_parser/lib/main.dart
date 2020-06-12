@@ -29,7 +29,8 @@ class MyApp extends StatelessWidget {
 
 class Page extends StatelessWidget {
   Page({Key key, this.title}) : super(key: key);
-  final String _json = "{\"id\":1,\"title\":\"title1\"}";
+  final String _json =
+      "{\"id\":1,\"title\":\"title1\",\"isEnabled\":true,\"values\":[1,2,3,4,5]}";
   final String title;
 
   @override

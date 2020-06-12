@@ -8,8 +8,12 @@ class DataByJsonSerializable {
   final int id;
   @JsonKey(name: 'title')
   final String title;
+  @JsonKey(name: 'isEnabled')
+  final bool isEnabled;
+  @JsonKey(name: 'values')
+  final List<int> values;
 
-  DataByJsonSerializable({this.id, this.title});
+  DataByJsonSerializable({this.id, this.title, this.isEnabled, this.values});
 
   factory DataByJsonSerializable.fromJson(Map<String, dynamic> json) =>
       _$DataByJsonSerializableFromJson(json);
