@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:jsonparser/data_by_built_value.dart';
+import 'package:jsonparser/data_by_freezed.dart';
 import 'package:jsonparser/data_by_json_serializable.dart';
 import 'package:jsonparser/serializers.dart';
 
@@ -53,6 +54,10 @@ class Page extends StatelessWidget {
               'built_value : ${serializers.deserializeWith(DataByBuiltValue.serializer, jsonDecode(_json)).toString()}',
               style: Theme.of(context).textTheme.bodyText1,
             ),
+            Text(
+              'freezed : ${DataByFreezed.fromJson(jsonDecode(_json)).toString()}',
+              style: Theme.of(context).textTheme.bodyText1,
+            )
           ],
         ),
       ),
