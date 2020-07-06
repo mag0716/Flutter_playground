@@ -8,11 +8,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Sample of InheritedWidget',
       theme: ThemeData(
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: CounterProvider(
+          counter: Counter(0),
+          child: MyHomePage(title: 'Sample of InheritedWidget')),
     );
   }
 }
@@ -27,16 +29,17 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  CounterProvider counterProvider;
 
   void _incrementCounter() {
     setState(() {
-      _counter++;
+      counterProvider.counter.increment();
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    counterProvider = CounterProvider.of(context);
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -49,7 +52,7 @@ class _MyHomePageState extends State<MyHomePage> {
               'You have pushed the button this many times:',
             ),
             Text(
-              '$_counter',
+              '${counterProvider.counter.count}',
               style: Theme.of(context).textTheme.headline4,
             ),
           ],
@@ -61,5 +64,30 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Icon(Icons.add),
       ),
     );
+  }
+}
+
+class CounterProvider extends InheritedWidget {
+  CounterProvider({Key key, Widget child, this.counter})
+      : super(key: key, child: child);
+
+  static CounterProvider of(BuildContext context) {
+    return context.dependOnInheritedWidgetOfExactType<CounterProvider>();
+  }
+
+  final Counter counter;
+
+  @override
+  bool updateShouldNotify(CounterProvider oldWidget) =>
+      counter != oldWidget.counter;
+}
+
+class Counter {
+  Counter(this.count);
+
+  int count;
+
+  increment() {
+    count++;
   }
 }
