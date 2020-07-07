@@ -12,74 +12,93 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: CounterProvider(
-          counter: Counter(0),
-          child: MyHomePage(title: 'Sample of InheritedWidget')),
+      home: ParentWidget(
+          child: Scaffold(
+        appBar: AppBar(title: Text("Sample of InheritedWidget")),
+        body: Center(child: _Text()),
+        floatingActionButton: _IncrementButton(),
+      )),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+class ParentWidget extends StatefulWidget {
+  ParentWidget({Key key, this.child, this.title}) : super(key: key);
 
+  final Widget child;
   final String title;
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  State<StatefulWidget> createState() => _ParentWidgetState(Counter(0));
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  CounterProvider counterProvider;
+class _ParentWidgetState extends State<ParentWidget> {
+  _ParentWidgetState(this.counter);
 
-  void _incrementCounter() {
+  final Counter counter;
+
+  void incrementCounter() {
     setState(() {
-      counterProvider.counter.increment();
+      counter.increment();
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    counterProvider = CounterProvider.of(context);
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '${counterProvider.counter.count}',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ),
+    return _InheritedWidget(
+      child: widget.child,
+      state: this,
     );
   }
 }
 
-class CounterProvider extends InheritedWidget {
-  CounterProvider({Key key, Widget child, this.counter})
+class _InheritedWidget extends InheritedWidget {
+  _InheritedWidget({Key key, @required Widget child, @required this.state})
       : super(key: key, child: child);
 
-  static CounterProvider of(BuildContext context) {
-    return context.dependOnInheritedWidgetOfExactType<CounterProvider>();
+  final _ParentWidgetState state;
+
+  static _InheritedWidget of(BuildContext context) {
+    return context.dependOnInheritedWidgetOfExactType<_InheritedWidget>();
   }
 
-  final Counter counter;
-
   @override
-  bool updateShouldNotify(CounterProvider oldWidget) =>
-      counter != oldWidget.counter;
+  bool updateShouldNotify(_InheritedWidget oldWidget) {
+    return true;
+  }
+}
+
+class _Text extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final _ParentWidgetState parentWidgetState =
+        _InheritedWidget.of(context).state;
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        Text(
+          'You have pushed the button this many times:',
+        ),
+        Text(
+          '${parentWidgetState.counter.count}',
+          style: Theme.of(context).textTheme.headline4,
+        ),
+      ],
+    );
+  }
+}
+
+class _IncrementButton extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final _ParentWidgetState parentWidgetState =
+        _InheritedWidget.of(context).state;
+    return FloatingActionButton(
+      onPressed: parentWidgetState.incrementCounter,
+      tooltip: 'Increment',
+      child: Icon(Icons.add),
+    );
+  }
 }
 
 class Counter {
