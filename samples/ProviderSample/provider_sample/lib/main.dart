@@ -61,13 +61,3 @@ class CounterModel extends ChangeNotifier {
     notifyListeners();
   }
 }
-
-class Counter {
-  Counter(this.count);
-
-  int count;
-
-  increment() {
-    count++;
-  }
-}
