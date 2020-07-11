@@ -54,20 +54,12 @@ class _IncrementButton extends StatelessWidget {
 }
 
 class CounterModel extends ChangeNotifier {
-  int count = 0;
+  var _count = 0;
+
+  int get count => _count;
 
   void increment() {
-    count++;
+    _count++;
     notifyListeners();
-  }
-}
-
-class Counter {
-  Counter(this.count);
-
-  int count;
-
-  increment() {
-    count++;
   }
 }
