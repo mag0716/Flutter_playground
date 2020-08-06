@@ -1,8 +1,10 @@
 import 'package:disample/repository.dart';
 
+import 'data.dart';
+
 class MockRepository implements Repository {
   @override
-  String loadData() {
-    return "Mock Data";
+  Data loadData() {
+    return Data(title: "Mock Data");
   }
 }

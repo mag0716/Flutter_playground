@@ -1,7 +1,14 @@
+import 'package:disample/data_state.dart';
+import 'package:disample/data_state_notifier.dart';
+import 'package:disample/repository.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_state_notifier/flutter_state_notifier.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(MyApp());
+  // TODO: flavor 毎に利用する repository を変更したい
+  runApp(MultiProvider(
+      providers: [Provider(create: (_) => Repository())], child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -9,58 +16,37 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'DI Sample',
-      theme: ThemeData(
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      home: MyHomePage(title: 'DI Sample'),
+        title: 'DI Sample',
+        theme: ThemeData(
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+        ),
+        home: StateNotifierProvider<DataStateNotifier, DataState>(
+            create: (context) => DataStateNotifier(),
+            child: Scaffold(
+              appBar: AppBar(title: Text("DI Sample")),
+              body: Center(child: _Page()),
+              floatingActionButton: _FetchButton(),
+            )));
+  }
+}
+
+class _Page extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      '${context.watch<DataState>().data}',
+      style: Theme.of(context).textTheme.headline4,
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-
-  final String title;
-
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
+class _FetchButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ),
+    return FloatingActionButton(
+      onPressed: () => context.read<DataStateNotifier>().fetchData(),
+      tooltip: 'Fetch',
+      child: const Icon(Icons.refresh),
     );
   }
 }
