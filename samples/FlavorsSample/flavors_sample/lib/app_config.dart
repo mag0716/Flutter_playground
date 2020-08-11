@@ -3,8 +3,13 @@ import 'package:flutter/cupertino.dart';
 class AppConfig extends InheritedWidget {
   final String appDisplayName;
   final int appInternalId;
+  final StringResource stringResource;
 
-  AppConfig({this.appDisplayName, this.appInternalId, Widget child})
+  AppConfig(
+      {this.appDisplayName,
+      this.appInternalId,
+      this.stringResource,
+      Widget child})
       : super(child: child);
 
   static AppConfig of(BuildContext context) {
@@ -14,4 +19,8 @@ class AppConfig extends InheritedWidget {
 
   @override
   bool updateShouldNotify(InheritedWidget context) => false;
+}
+
+abstract class StringResource {
+  String APP_DESCRIPTION;
 }
