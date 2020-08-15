@@ -26,6 +26,27 @@ apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 android {
+
+    flavorDimensions "env"
+
+    productFlavors {
+        product {
+            dimension "env"
+            applicationId "com.github.mag0716.disample"
+            resValue "string", "app_name", "DI Sample"
+        }
+        staging {
+            dimension "env"
+            applicationId "com.github.mag0716.disample"
+            resValue "string", "app_name", "DI Sample(staging)"
+        }
+        dev {
+            dimension "env"
+            applicationId "com.github.mag0716.disample"
+            resValue "string", "app_name", "DI Sample(dev)"
+        }
+    }
+
     compileSdkVersion 28
 
     sourceSets {
@@ -61,3 +82,4 @@ flutter {
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
+

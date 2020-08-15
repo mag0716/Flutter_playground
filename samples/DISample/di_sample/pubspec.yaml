@@ -78,3 +78,32 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+
+flavorizr:
+  app:
+    android:
+      flavorDimensions: "env"
+    ios:
+
+  flavors:
+    product:
+      app:
+        name: "DI Sample"
+      android:
+        applicationId: "com.github.mag0716.disample"
+      ios:
+        bundleId: "com.github.mag0716.disample"
+    staging:
+      app:
+        name: "DI Sample(staging)"
+      android:
+        applicationId: "com.github.mag0716.disample"
+      ios:
+        bundleId: "com.github.mag0716.disample"
+    dev:
+      app:
+        name: "DI Sample(dev)"
+      android:
+        applicationId: "com.github.mag0716.disample"
+      ios:
+        bundleId: "com.github.mag0716.disample"
