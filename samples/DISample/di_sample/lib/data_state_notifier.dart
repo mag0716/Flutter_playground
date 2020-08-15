@@ -7,9 +7,10 @@ class DataStateNotifier extends StateNotifier<DataState> with LocatorMixin {
 
   Repository get repository => read();
 
-  // FIXME: 非同期処理に変更
-  void fetchData() {
-    var data = repository.loadData();
+  void fetchData() async {
+    print('fetchData start...');
+    var data = await repository.loadData();
     state = DataState(isInitialized: false, data: data);
+    print('fetchData end...');
   }
 }

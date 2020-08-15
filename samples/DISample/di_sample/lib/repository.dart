@@ -1,7 +1,8 @@
 import 'data.dart';
 
 class Repository {
-  Data loadData() {
-    return Data(title: "Data");
+  Future<Data> loadData() async {
+    return await Future.delayed(
+        Duration(seconds: 5), () => Data(title: "Data"));
   }
 }

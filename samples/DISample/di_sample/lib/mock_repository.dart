@@ -4,7 +4,7 @@ import 'data.dart';
 
 class MockRepository implements Repository {
   @override
-  Data loadData() {
+  Future<Data> loadData() async {
     return Data(title: "Mock Data");
   }
 }
