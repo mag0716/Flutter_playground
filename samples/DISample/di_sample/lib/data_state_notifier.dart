@@ -2,10 +2,12 @@ import 'package:disample/data_state.dart';
 import 'package:disample/repository.dart';
 import 'package:state_notifier/state_notifier.dart';
 
-class DataStateNotifier extends StateNotifier<DataState> with LocatorMixin {
-  DataStateNotifier() : super(DataState());
+import 'repository.dart';
 
-  Repository get repository => read();
+class DataStateNotifier extends StateNotifier<DataState> with LocatorMixin {
+  DataStateNotifier({this.repository}) : super(DataState());
+
+  final Repository repository;
 
   void fetchData() async {
     print('fetchData start...');

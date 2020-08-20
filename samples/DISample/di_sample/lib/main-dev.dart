@@ -1,8 +1,12 @@
+import 'package:disample/di_container.dart';
 import 'package:flutter/material.dart';
-import 'app.dart';
+
 import 'flavors.dart';
+import 'main.dart';
+import 'mock_repository.dart';
 
 void main() {
   F.appFlavor = Flavor.DEV;
-  runApp(App());
+  DiContainer.repository = MockRepository();
+  runApp(MyApp());
 }
