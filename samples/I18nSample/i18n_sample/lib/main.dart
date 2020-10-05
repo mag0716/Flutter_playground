@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
-
-import 'i18n/i18n.dart';
+import 'package:flutter_gen/gen_l10n/translations.dart';
 
 void main() {
   runApp(MyApp());
@@ -17,16 +15,8 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      localizationsDelegates: [
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-        I18n.delegate,
-      ],
-      supportedLocales: [
-        const Locale('en'),
-        const Locale('ja'),
-      ],
+      localizationsDelegates: Translations.localizationsDelegates,
+      supportedLocales: Translations.supportedLocales,
       home: Page(),
     );
   }
@@ -42,9 +32,9 @@ class Page extends StatelessWidget {
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-              Text("current locale = " + I18n.of(context).localeName),
-              Text(I18n.of(context).title),
-              Text(I18n.of(context).message),
+              Text("current locale = " + Translations.of(context).localeName),
+              Text(Translations.of(context).title),
+              Text(Translations.of(context).message),
             ])));
   }
 }
